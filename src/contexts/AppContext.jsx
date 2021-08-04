@@ -1,17 +1,19 @@
 import React, { createContext, useState } from 'react'
 
-export default AppContext = createContext({ loggedIn: false, user: {} })
+const AppContext = createContext()
 
-export function AppProvider({ children }) {
+export const AppProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [user, setUser] = useState({})
 
-    const value = {
+    const values = {
         isLoggedIn,
         setIsLoggedIn,
         user,
         setUser,
     }
 
-    return <AppContext.Provider value={value}>{children}</AppContext.Provider>
+    return <AppContext.Provider value={values}>{children}</AppContext.Provider>
 }
+
+export default AppContext
