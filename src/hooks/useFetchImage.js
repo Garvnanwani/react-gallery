@@ -10,7 +10,7 @@ export default function useFetchImage(page, searchTerm) {
     const [error, setError] = useState('')
     const [isLoading, setIsLoading] = useState(false)
 
-    function fetch() {
+    function fetch(page, searchTerm) {
         const url =
             searchTerm === null ? 'curated' : `search?query=${searchTerm}`
 
@@ -44,7 +44,7 @@ export default function useFetchImage(page, searchTerm) {
     useEffect(() => {
         setIsLoading(true)
         fetch(page, searchTerm)
-    }, [page, searchTerm])
+    }, [page])
 
-    return [images, setImages, error, isLoading]
+    return [images, setImages, error, isLoading, fetch]
 }

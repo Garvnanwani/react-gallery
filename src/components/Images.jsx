@@ -2,32 +2,43 @@ import React, { useState } from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import useFetchImage from '../hooks/useFetchImage'
 import Loading from './Loading'
-import useDebounce from '../hooks/useDebounce'
+// import useDebounce from '../hooks/useDebounce'
 import Image from './Image'
 
 const Images = () => {
     const [page, setPage] = useState(1)
     const [searchTerm, setSearchTerm] = useState(null)
     const [showPreview, setShowPreview] = useState(null)
-    const [images, setImages, error, isLoading] = useFetchImage(
+    const [images, setImages, error, isLoading, fetch] = useFetchImage(
         page,
         searchTerm
     )
 
-    const debounce = useDebounce()
+    // const debounce = useDebounce()
+    // function handleInput(e) {
+    //     const text = e.target.value
+    //     debounce(() => setSearchTerm(text))
+    // }
+
     function handleInput(e) {
-        const text = e.target.value
-        debounce(() => setSearchTerm(text))
+        setSearchTerm(e.target.value)
+    }
+    function handleSubmit(e) {
+        e.preventDefault()
+        fetch(page, searchTerm)
     }
     return (
         <div>
             <div className="my-5">
-                <input
-                    type="text"
-                    onChange={handleInput}
-                    className="w-full p-2 border rounded shadow"
-                    placeholder="Search Photos"
-                />
+                <form onSubmit={handleSubmit}>
+                    <input
+                        type="text"
+                        onChange={handleInput}
+                        value={searchTerm}
+                        className="w-full p-2 border rounded shadow"
+                        placeholder="Search Photos"
+                    />
+                </form>
             </div>
 
             {error && (
@@ -45,6 +56,7 @@ const Images = () => {
                 {images.map((img, index) => (
                     <Image
                         image={img.src.tiny}
+                        originalImage={img.src.original}
                         key={index}
                         index={index}
                         show={() => setShowPreview(index)}
