@@ -66,12 +66,12 @@ const Images = () => {
 
             {showPreview && (
                 <div
-                    className="fixed top-0 left-0 z-40 flex justify-center w-full h-full item-center"
+                    className="absolute top-20 left-1/3 z-40 flex justify-center w-90 h-40 items-center"
                     onClick={() => setShowPreview(false)}
                 >
                     <div className="my-auto bg-white">
                         <img
-                            src={images[showPreview].src.tiny}
+                            src={images[showPreview].src.original}
                             width="600"
                             height="200"
                             className="rounded-lg"
