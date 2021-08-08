@@ -1,10 +1,6 @@
-[x] tailwind setup
-[x] folders
-[x] context
-[x] firebase
-[] hooks
-[x] routes
-[x] components[images][image]
-[x] pages[gallery][tensorflow]
-[] framer motion
-[] tensorflow
+####  React gallery app made with vite, tailwind css and tensorflow js to show predictions for all images.
+
+##### Functionalities -> 
+- search for images
+- download images
+- classify images using tensorflow js
